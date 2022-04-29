@@ -19,7 +19,8 @@ router.get('/test',(req,res) => {
 
 router.post('/testpost',(req,res) => {
     res.json({
-        hello: "hit the POST!"
+        name: "test 1",
+        city: "test 2"
       });
 })
 
