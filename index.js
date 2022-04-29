@@ -4,8 +4,6 @@ const bodyParser    = require('body-parser');
 const routes        = require('./routes');
 const path          = require('path');
 
-const db = new Database('weather-app.db');
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
@@ -13,7 +11,7 @@ app.use(bodyParser.urlencoded({
 app.set('views', './views');
 app.use('/static', express.static(path.resolve('static')));
 
-app.use(routes(db));
+app.use(routes());
 
 app.all('*', (req, res) => {
     return res.status(404).send({
@@ -22,8 +20,5 @@ app.all('*', (req, res) => {
 });
 
 (async () => {
-    await db.connect();
-    await db.migrate();
-
     app.listen(80, () => console.log('Listening on port 80'));
 })();
