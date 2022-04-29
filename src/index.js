@@ -11,11 +11,11 @@ router.get('/', (req, res) => {
   })
 });
 
-app.all('*', (req, res) => {
-    return res.status(404).send({
-        message: '404 page not found'
-    });
-});
+// app.all('*', (req, res) => {
+//     return res.status(404).send({
+//         message: '404 page not found'
+//     });
+// });
 
 app.use('./netlify/functions', router)
 
