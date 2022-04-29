@@ -1,22 +1,29 @@
-const express       = require('express');
-const serverless    = require('serverless-http');
+const express = require("express");
+const serverless = require("serverless-http");
 
 const app = express();
-
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get("/", (req, res) => {
   res.json({
-    'test': 'test123'
-  })
+    hello: "hi!"
+  });
 });
 
-// app.all('*', (req, res) => {
-//     return res.status(404).send({
-//         message: '404 page not found'
-//     });
-// });
+router.get('/test',(req,res) => {
+    res.json({
+        hello: "test!"
+      });
 
-app.use('./netlify/functions', router)
+})
 
-module.export.handler = serverless(app);
+router.post('/testpost',(req,res) => {
+    res.json({
+        hello: "hit the POST!"
+      });
+})
+
+app.use(`/.netlify/functions/api`, router);
+
+module.exports = app;
+module.exports.handler = serverless(app);
